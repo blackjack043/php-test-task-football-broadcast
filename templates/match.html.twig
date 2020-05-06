@@ -130,6 +130,16 @@
                              <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/goal.png">
                              {% endif %}
                         </td>
+                          <td>
+                            {% if player.YellowCard == true %}
+                              <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/card.png">
+                             {% endif %}
+                        </td>
+                        <td>
+                            {% if player.RedCard == true %}
+                                    <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/yellow_red.png">
+                             {% endif %}
+                        </td>
 
                     </tr>
                 {% endfor %}

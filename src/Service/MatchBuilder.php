@@ -115,6 +115,14 @@ class MatchBuilder
                     $team->addGoal();
                     $team->getPlayer($details['playerNumber'])->isGoal(); // присвоить статус забитого гола игроку
                     break;
+                case 'yellowCard':
+                    $team = $this->getTeamByName($match, $details['team']);
+                    $team->getPlayer($details['playerNumber'])->isYellowCard(); // присвоить статус желтой карточки игроку
+                    break;
+                case 'redCard':
+                    $team = $this->getTeamByName($match, $details['team']);
+                    $team->getPlayer($details['playerNumber'])->isRedCard(); // присвоить статус красной карточки игроку
+                    break;
 
             }
 

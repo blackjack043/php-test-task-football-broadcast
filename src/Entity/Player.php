@@ -12,6 +12,8 @@ class Player
     private int $inMinute;
     private int $outMinute;
     private bool $goalStatus;
+    private bool $yellowCardStatus;
+    private bool $redCardStatus;
 
     public function __construct(int $number, string $name)
     {
@@ -21,6 +23,9 @@ class Player
         $this->inMinute = 0;
         $this->outMinute = 0;
         $this->goalStatus = false;
+        $this->yellowCardStatus = false;
+        $this->redCardStatus = false;
+
     }
 
     public function getNumber(): int
@@ -50,7 +55,17 @@ class Player
 
     public function isGoal(): void
     {
-         $this->goalStatus = true; //присвоить переменной goalStatus значение истины
+         $this->goalStatus = true; //присвоить переменной значение истины
+    }
+
+    public function isYellowCard(): void
+    {
+         $this->yellowCardStatus = true; //присвоить переменной  значение истины
+    }
+
+    public function isRedCard(): void
+    {
+         $this->redCardStatus = true; //присвоить переменной  значение истины
     }
 
     public function getPlayTime(): int
@@ -66,6 +81,17 @@ class Player
     {
         return $this->goalStatus;   // Получаем статус забитого гола у игрока
     }
+
+    public function getYellowCard(): bool
+    {
+        return $this->yellowCardStatus;   // Получаем статус желтой карточки у игрока
+    }
+
+    public function getRedCard(): bool
+    {
+        return $this->redCardStatus;   // Получаем статус красной карточки у игрока
+    }
+
     public function goToPlay(int $minute): void
     {
         $this->inMinute = $minute;
