@@ -11,6 +11,7 @@ class Player
     private string $playStatus;
     private int $inMinute;
     private int $outMinute;
+    private bool $goalStatus;
 
     public function __construct(int $number, string $name)
     {
@@ -19,6 +20,7 @@ class Player
         $this->playStatus = self::BENCH_PLAY_STATUS;
         $this->inMinute = 0;
         $this->outMinute = 0;
+        $this->goalStatus = false;
     }
 
     public function getNumber(): int
@@ -46,15 +48,24 @@ class Player
         return $this->playStatus === self::PLAY_PLAY_STATUS;
     }
 
+    public function isGoal(): void
+    {
+         $this->goalStatus = true; //присвоить переменной goalStatus значение истины
+    }
+
     public function getPlayTime(): int
     {
         if(!$this->outMinute) {
             return 0;
         }
 
-        return $this->outMinute - $this->inMinute + 1; // Добавляем 1 минуту, потому что периоды начинаются в логах с 1 и 46 минуты. Т.е время до 00.59 - это первая минута, а по факту игрок сыграл 0 минут и сколько то секунд. Также эта минута будет добавлятся если игрок вышел на поле в качестве запасного, потому что эта минута опять же сдвигается. 
+        return $this->outMinute - $this->inMinute + 1; // Добавляем 1 минуту, потому что периоды начинаются в логах с 1 и 46 минуты. Т.е время до 00.59 - это первая минута, а по факту игрок сыграл 0 минут и сколько то секунд. Также эта минута будет добавлятся если игрок вышел на поле в качестве запасного, потому что эта минута опять же сдвигается. ;
     }
 
+    public function getGoal(): bool
+    {
+        return $this->goalStatus;   // Получаем статус забитого гола у игрока
+    }
     public function goToPlay(int $minute): void
     {
         $this->inMinute = $minute;

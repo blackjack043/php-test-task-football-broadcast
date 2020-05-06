@@ -125,6 +125,12 @@
                         <td>
                             {{ player.playTime }}’
                         </td>
+                         <td>
+                            {% if player.Goal == true %}
+                             <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/goal.png">
+                             {% endif %}
+                        </td>
+
                     </tr>
                 {% endfor %}
                 </tbody>
