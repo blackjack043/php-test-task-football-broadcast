@@ -7,14 +7,16 @@ class Team
     private string $name;
     private string $country;
     private string $logo;
+ 
     /**
      * @var Player[]
      */
     private array $players;
+    private array $group;
     private string $coach;
     private int $goals;
 
-    public function __construct(string $name, string $country, string $logo, array $players, string $coach)
+    public function __construct(string $name, string $country, string $logo, array $players, string $coach, array $group)
     {
         $this->assertCorrectPlayers($players);
 
@@ -22,6 +24,7 @@ class Team
         $this->country = $country;
         $this->logo = $logo;
         $this->players = $players;
+        $this->group = $group;
         $this->coach = $coach;
         $this->goals = 0;
     }
@@ -40,6 +43,12 @@ class Team
     {
         return $this->logo;
     }
+
+    public function getGroup(): array
+    {
+        return $this->group;
+    }
+
 
     /**
      * @return Player[]

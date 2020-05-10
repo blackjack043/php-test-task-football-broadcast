@@ -14,8 +14,10 @@ class Player
     private bool $goalStatus;
     private bool $yellowCardStatus;
     private bool $redCardStatus;
+    private string $position;
 
-    public function __construct(int $number, string $name)
+
+    public function __construct(int $number, string $name, string $position)
     {
         $this->number = $number;
         $this->name = $name;
@@ -25,6 +27,8 @@ class Player
         $this->goalStatus = false;
         $this->yellowCardStatus = false;
         $this->redCardStatus = false;
+        $this->position = $position;
+
 
     }
 
@@ -36,6 +40,11 @@ class Player
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPosition(): string
+    {
+        return $this->position;
     }
 
     public function getInMinute(): int

@@ -6,6 +6,7 @@ use App\Entity\Match;
 use App\Entity\Player;
 use App\Entity\Stadium;
 use App\Entity\Team;
+use App\Entity\Group;
 
 class MatchBuilder
 {
@@ -13,6 +14,7 @@ class MatchBuilder
     {
         $event = $this->extractStartMatchEvent($logs);
 
+       
         $dateTime = $this->buildMatchDateTime($event);
         $tournament = $this->extractTournament($event);
         $stadium = $this->buildStadium($event);
@@ -68,15 +70,22 @@ class MatchBuilder
         return $this->buildTeam($startMatchEvent, 2);
     }
 
+
+
     private function buildTeam(array $event, string $teamNumber): Team
     {
         $teamInfo = $event['details']["team$teamNumber"];
         $players = [];
         foreach ($teamInfo['players'] as $playerInfo) {
-            $players[] = new Player($playerInfo['number'], $playerInfo['name']);
+            $players[] = new Player($playerInfo['number'], $playerInfo['name'], $playerInfo['position']);
+        }
+        $type = ['В','З','П','Н'];
+        $group = [];
+        foreach ($type as $i ) {
+            $group [] = new Group($i, $players);
         }
 
-        return new Team($teamInfo['title'], $teamInfo['country'], $teamInfo['logo'], $players, $teamInfo['coach']);
+        return new Team($teamInfo['title'], $teamInfo['country'], $teamInfo['logo'], $players, $teamInfo['coach'], $group);
     }
 
     private function processLogs(Match $match, array $logs): void
@@ -142,6 +151,8 @@ class MatchBuilder
 
         return $additionalTime > 0 ? "$periodEnd + $additionalTime" : $time;
     }
+
+
 
     private function buildMessageType(array $event): string
     {

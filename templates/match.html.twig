@@ -126,6 +126,9 @@
                             {{ player.playTime }}’
                         </td>
                          <td>
+                            {{ player.Position }}
+                        </td>
+                         <td>
                             {% if player.Goal == true %}
                              <img src="https://www.soccer.ru/sites/all/themes/newtheme/images/events-icons/goal.png">
                              {% endif %}
@@ -144,6 +147,36 @@
                     </tr>
                 {% endfor %}
                 </tbody>
+            </table>
+        </div>
+            <div class="card-header text-center">
+         table for position
+         </div>
+         <div class="card-body">
+            <table class="table table">
+                <thead>
+                <tr>
+                    <th>POSITION</th>
+                    <th>TIME</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for  g in team.group %}
+                    <tr>
+                        <td>
+                            {{ g.position }}
+                        </td>
+
+                        <td>
+			{{ g.TimePosition }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+             
+                </tbody>
+                
             </table>
         </div>
     </div>
